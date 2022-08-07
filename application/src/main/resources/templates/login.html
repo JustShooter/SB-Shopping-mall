@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/common/head_data :: head">
+    <title>Title</title>
+</head>
+<body class="d-flex flex-column min-vh-100 login-page">
+
+
+<main>
+
+    <div class="login-block">
+        <img th:src="@{/mall-logo.png}"
+             alt="Shopping-mall" style="max-width: 100%; height: auto">
+        <h1 th:text="#{common.menu.login.login_please}">Log into your account</h1>
+
+        <form action="#" th:action="@{/login}" method="post">
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
+                    <input type="text"
+                           class="form-control"
+                           th:placeholder="#{common.menu.login.name}"
+                           name="username">
+                </div>
+            </div>
+
+            <hr class="hr-xs">
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>
+                    <input type="password"
+                           class="form-control"
+                           th:placeholder="#{common.menu.login.password}"
+                           name="password">
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-block" type="submit">Sign up</button>
+            <button class="btn btn-primary btn-block" type="button" onclick="location.href='/'">Back</button>
+
+
+            <div class="login-footer">
+                <h6 th:text="#{common.shopping_mall.name}">Welcome</h6>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="login-links text-center">
+        <p class="text-black"
+           th:text="#{common.menu.login.register_please}">Don't have an account? Register here</p>
+        <a class="text-black" th:href="@{'/register'}" th:text="#{common.menu.register}">Register</a>
+    </div>
+
+</main>
+
+<footer th:replace="/common/footer :: content"></footer>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:replace="/common/head_data :: head">
+    <title>Title</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<header th:include="/common/header :: content"></header>
+
+<h1 class="bg-light" th:text="#{common.menu.administrator.locations.list}">Список категорий</h1>
+
+<div class="container-flex">
+    <div class="row">
+        <div class="d-flex">
+            <table class="table table-hover table-striped bg-light">
+                <thead>
+                <tr>
+                    <th scope="col" th:text="#{common.ID}">ID</th>
+                    <th scope="col" th:text="#{common.location.shop_number}">Номер магазина</th>
+                    <th scope="col" th:text="#{common.location.floor}">Этаж</th>
+                    <th scope="col" th:text="#{common.location.description}">Этаж</th>
+                    <th scope="col" th:text="#{common.menu.operations}">Операции</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                <tr th:each="location : ${allLocations}">
+                    <th scope="row" th:text="${location.getId()}"></th>
+                    <td th:text="${location.getShopNumber()}"></td>
+                    <td th:text="${location.getFloor()}"></td>
+                    <td th:text="${location.getDescription()}"></td>
+                    <td>
+                        <a role="button" class="btn btn-info btn-sm"
+                           th:href="@{'/admin/locations/edit/' + ${location.getId()}}"
+                           th:text="#{common.menu.administrator.locations.edit}">Редактировать</a>
+                        <a role="button" class="btn btn-danger btn-sm"
+                           th:href="@{'/admin/locations/delete/' + ${location.getId()}}"
+                           th:text="#{common.menu.administrator.locations.delete}">Удалить</a>
+                    </td>
+                </tr>
+
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th scope="col" th:text="#{common.ID}">ID</th>
+                    <th scope="col" th:text="#{common.location.shop_number}">Номер магазина</th>
+                    <th scope="col" th:text="#{common.location.floor}">Этаж</th>
+                    <th scope="col" th:text="#{common.location.description}">Этаж</th>
+                    <th scope="col" th:text="#{common.menu.operations}">Операции</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="bg-light d-grid gap-2">
+    <a role="button" class="btn btn-success btn-lg"
+       th:href="@{'/admin/locations/new'}"
+       th:text="#{common.menu.administrator.locations.add}">Создать</a>
+</div>
+
+<footer th:replace="/common/footer :: content"></footer>
+</body>
+</html>
