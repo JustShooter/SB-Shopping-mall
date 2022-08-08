@@ -7,7 +7,7 @@
 		<groupId>by.itacademy.justshooter.shoppingmall</groupId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>application</artifactId>
+	<artifactId>sb-shopping-mall.application</artifactId>
 	<packaging>jar</packaging>
 	<name>application</name>
 	<description>application</description>

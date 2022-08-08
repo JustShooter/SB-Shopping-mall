@@ -105,17 +105,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void saveShopOwner(ShopOwnerDto shopOwner) {
-        System.out.println("dto : " + shopOwner);
-        System.out.println("dto address : " + shopOwner.getAddress());
-        System.out.println("dto address id : " + shopOwner.getAddress().getId());
-        System.out.println("     ----- ----- -----     ");
-        ShopOwner shopOwnerEntity = modelMapper.map(shopOwner, ShopOwner.class);
-        shopOwnerEntity.setAddress(addressRepository.findById(shopOwner.getAddress().getId()).orElseThrow());
-        System.out.println(shopOwnerEntity);
-        System.out.println(shopOwnerEntity.getAddress());
-        System.out.println(shopOwnerEntity.getAddress().getId());
-
-//        shopOwnerRepository.save(modelMapper.map(shopOwner, ShopOwner.class));
+        shopOwnerRepository.save(modelMapper.map(shopOwner, ShopOwner.class));
     }
 
     @Override

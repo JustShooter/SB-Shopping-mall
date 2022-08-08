@@ -8,7 +8,6 @@
 <header th:include="/common/header :: content"></header>
 
 <!--Edit location-->
-
 <div class="container px-5 my-5">
 
     <form class="row g-3 needs-validation" accept-charset="UTF-8" action="#" novalidate
@@ -48,18 +47,13 @@
 
         <div class="form-floating mb-3">
             <select class="form-select" name="address" id="address"
-                    aria-label="Адрес компании" required>
-                <option th:each="addr : ${allAddresses}"
-                        th:selected="${shopOwner.getAddress().getId() == addr.getId()}"
-                        th:value="${addr.id}"
-                        th:text="${addr}">
+                    aria-label="Адрес компании" required th:field="*{address}">
+                <option th:each="address : ${allAddresses}"
+                        th:value="${address}"
+                        th:text="${address.toTableView()}">
                 </option>
             </select>
             <label for="address" th:text="#{common.shop_owner.address}">Адрес компании</label>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newAddress"
-                    th:text="#{common.shop_owner.address.create-new}">
-                Добавить новый адрес
-            </button>
         </div>
         <div class="d-grid">
             <button class="btn btn-primary btn-lg" type="submit"
@@ -73,103 +67,6 @@
 
 </div>
 
-<!--modal newAddress-->
-
-<div class="modal fade" id="newAddress" th:object="${address}"
-     data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="newAddressModalLabel"
-                    th:text="#{common.shop_owner.address.create-new}">Заголовок модального окна</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-            </div>
-            <div class="modal-body">
-                <form id="address-form" class="row g-3 needs-validation" accept-charset="UTF-8" action="#" novalidate
-                      th:action="@{/admin/shop-owners/address/new}"
-                      th:object="${address}" method="post">
-                    <div class="form-floating mb-3">
-                        <input class="form-control" name="city" id="city" type="text"
-                               th:placeholder="#{common.address.city}" required
-                               th:field="*{city}"
-                               th:classappend="${#fields.hasErrors('city')} ? is-invalid : is-valid"/>
-                        <label for="city" th:text="#{common.address.city}">Город</label>
-                        <div th:if="${#fields.hasErrors('city')}" class="invalid-feedback bg-info fs-5"
-                             th:errors="*{city}">
-                        </div>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <select class="form-select" name="streetType" id="streetType"
-                                th:attr="aria-label=#{common.address.street_type}"
-                                th:field="*{streetType}" required>
-                            <option th:each="strType : ${streetTypes}"
-                                    th:value="${strType.name()}"
-                                    th:text="${strType.getFullName()}">
-                            </option>
-                        </select>
-                        <label for="streetType" th:text="#{common.address.street_type}">Тип улицы</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" name="street" id="street" type="text"
-                               th:placeholder="#{common.address.street}"
-                               required
-                               th:field="*{street}"
-                               th:classappend="${#fields.hasErrors('street')} ? is-invalid : is-valid"/>
-                        <label for="street" th:text="#{common.address.street}">Название улицы</label>
-                        <div th:if="${#fields.hasErrors('street')}" class="invalid-feedback bg-info fs-5"
-                             th:errors="*{street}">
-                        </div>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" name="buildingNumber" id="buildingNumber" type="text"
-                               th:placeholder="#{common.address.building_number}"
-                               required
-                               th:field="*{buildingNumber}"
-                               th:classappend="${#fields.hasErrors('buildingNumber')} ? is-invalid : is-valid"/>
-                        <label for="buildingNumber" th:text="#{common.address.building_number}">Номер дома</label>
-                        <div th:if="${#fields.hasErrors('buildingNumber')}" class="invalid-feedback bg-info fs-5"
-                             th:errors="*{buildingNumber}">
-                        </div>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" name="officeNumber" id="officeNumber" type="text"
-                               th:placeholder="#{common.address.office_number}"
-                               th:field="*{officeNumber}"
-                               th:classappend="${#fields.hasErrors('officeNumber')} ? is-invalid : is-valid"/>
-                        <label for="officeNumber" th:text="#{common.address.office_number}">Номер офиса</label>
-                        <div th:if="${#fields.hasErrors('officeNumber')}" class="invalid-feedback bg-info fs-5"
-                             th:errors="*{officeNumber}">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{common.menu.close}">
-                    Закрыть
-                </button>
-                <button type="submit" class="btn btn-primary" form="address-form" th:text="#{common.menu.save}">
-                    Сохранить изменения
-                </button>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript" th:if="${#fields.hasErrors('city') or
-                                        #fields.hasErrors('street') or
-                                        #fields.hasErrors('buildingNumber') or
-                                        #fields.hasErrors('officeNumber')}">
-        var addressModal = new bootstrap.Modal(
-            document.getElementById('newAddress'),
-            {
-                backdrop: 'static',
-                keyboard: false
-            }
-        )
-        addressModal.show()
-    </script>
-</div>
-
-<!--modal newAddress-->
 <footer th:replace="/common/footer :: content"></footer>
 </body>
 </html>

@@ -27,7 +27,7 @@
                 <tr th:each="shopOwner : ${allShopOwners}">
                     <th scope="row" th:text="${shopOwner.getId()}"></th>
                     <td th:text="${shopOwner.getOwnerName()}"></td>
-                    <td th:text="${shopOwner.getAddress()}"></td>
+                    <td th:text="${shopOwner.getAddress().toTableView()}"></td>
                     <td>
                         <a role="button" class="btn btn-info btn-sm"
                            th:href="@{'/admin/shop-owners/edit/' + ${shopOwner.getId()}}"

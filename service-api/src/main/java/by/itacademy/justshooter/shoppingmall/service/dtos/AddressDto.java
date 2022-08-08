@@ -39,9 +39,14 @@ public class AddressDto implements Serializable {
     @Pattern(regexp = "^[0-9]+?[А-Яа-яЁёA-Za-z0-9/-]*?[А-Яа-яЁёA-Za-z0-9]*?$", message = "{validation.address.office_number.pattern}")
     private String officeNumber;
 
+
     @Override
     public String toString() {
-        return  city + ", " +
+        return id + "," + city + "," + street + "," + streetType + "," + buildingNumber + "," + officeNumber;
+    }
+
+    public String toTableView() {
+        return city + ", " +
                 streetType.getFullName() + " " +
                 street + ", " +
                 buildingNumber + "-" +
