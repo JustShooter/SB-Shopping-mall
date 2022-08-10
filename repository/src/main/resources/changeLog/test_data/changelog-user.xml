@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="10-users" author="JustShooter" context="test-data">
+    <comment>Adding users</comment>
+        <insert tableName="user">
+            <column name="username" value="admin"/>
+            <column name="password" value="$2a$10$TRvrcA/c07LFsRgDNfQ7lu8APf9/Tsy7uFSguU66qvLDD4.SjAnQi"/>
+            <column name="email" value="justshooter@gmail.com"/>
+            <column name="role" value="ROLE_ADMIN"/>
+        </insert>
+        <insert tableName="user">
+            <column name="username" value="user"/>
+            <column name="password" value="$2a$10$k1aAMEB93qmz4VT4vDhlWuwdFyTi3IHjdMTUTXBLb2RujdG/hhrBu"/>
+            <column name="email" value="user@mail.com"/>
+            <column name="role" value="ROLE_USER"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

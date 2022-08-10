@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:replace="/common/head_data :: head">
+    <title>Title</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<header th:include="/common/header :: content"></header>
+
+<!--Edit location-->
+<div class="container px-5 my-5">
+
+    <form class="row g-3 needs-validation" accept-charset="UTF-8" action="#" novalidate
+          th:action="${shopOwner.getId() == null} ? @{/admin/shop-owners/new} : @{/admin/shop-owners/edit/{id}(id=*{id})}"
+          th:object="${shopOwner}" method="post">
+
+        <h1 class="bg-light text-center" th:if="${shopOwner.getId() == null}"
+            th:text="#{common.menu.administrator.shop_owners.add}">
+            Создание нового владельца магазина
+        </h1>
+        <h1 class="bg-light text-center" th:if="${shopOwner.getId() != null}"
+            th:utext="#{common.menu.administrator.shop_owners.edit} + '<br>' + *{ownerName}">
+            Редактирование владельца магазина
+        </h1>
+        <div class="form-floating mb-3" th:if="${shopOwner.getId() != null}">
+            <input class="form-control" name="id" id="id" type="text"
+                   placeholder="#{common.ID}"
+                   th:field="*{id}" readonly tabindex="-1"
+                   th:classappend="${#fields.hasErrors('id')} ? is-invalid : is-valid"/>
+            <label for="id" th:text="#{common.ID}">Идентификационный номер</label>
+            <div th:if="${#fields.hasErrors('id')}" class="invalid-feedback bg-info fs-5"
+                 th:errors="*{id}">
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input class="form-control" name="ownerName" id="ownerName" type="text"
+                   th:placeholder="#{common.shop_owner.owner_name}"
+                   required
+                   th:field="*{ownerName}"
+                   th:classappend="${#fields.hasErrors('ownerName')} ? is-invalid : is-valid"/>
+            <label for="ownerName"
+                   th:text="#{common.shop_owner.owner_name}">Название компании</label>
+            <div th:if="${#fields.hasErrors('ownerName')}" class="invalid-feedback bg-info fs-5"
+                 th:errors="*{ownerName}">
+            </div>
+        </div>
+
+        <div class="form-floating mb-3">
+            <select class="form-select" name="address" id="address"
+                    aria-label="Адрес компании" required th:field="*{address}">
+                <option th:each="address : ${allAddresses}"
+                        th:value="${address}"
+                        th:text="${address.toTableView()}">
+                </option>
+            </select>
+            <label for="address" th:text="#{common.shop_owner.address}">Адрес компании</label>
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-primary btn-lg" type="submit"
+                    th:text="#{common.menu.save}">Сохранить
+            </button>
+            <a class="btn btn-danger btn-lg" type="button" href="#"
+               th:href="@{'/admin/shop-owners'}" th:text="#{common.menu.back}">Назад</a>
+        </div>
+
+    </form>
+
+</div>
+
+<footer th:replace="/common/footer :: content"></footer>
+</body>
+</html>

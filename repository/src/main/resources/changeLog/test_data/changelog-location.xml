@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="1-locations" author="JustShooter" context="test-data">
+        <comment>Add data to location table</comment>
+        <insert tableName="location">
+            <column name="id" value="1"/>
+            <column name="description" value="Возле главного входа"/>
+            <column name="floor" value="1"/>
+            <column name="shop_number" value="101"/>
+            <column name="shop_id" value="1"/>
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="2"/>
+            <column name="floor" value="1"/>
+            <column name="shop_number" value="102"/>
+            <column name="shop_id" value="2"/>
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="3"/>
+            <column name="floor" value="1"/>
+            <column name="shop_number" value="103"/>
+            <column name="shop_id" value="3"/>
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="4"/>
+            <column name="description" value="Возле лифта"/>
+            <column name="floor" value="1"/>
+            <column name="shop_number" value="104"/>
+            <column name="shop_id" value="4"/>
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="5"/>
+            <column name="floor" value="1"/>
+            <column name="shop_number" value="105"/>
+            <column name="shop_id" value="5"/>
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="6"/>
+            <column name="floor" value="1"/>
+            <column name="shop_number" value="106"/>
+            <column name="shop_id" value="6"/>
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="7"/>
+            <column name="floor" value="2"/>
+            <column name="shop_number" value="201"/>
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="8"/>
+            <column name="floor" value="2"/>
+            <column name="shop_number" value="202"/>
+            <column name="shop_id" value="7"/>
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="9"/>
+            <column name="floor" value="2"/>
+            <column name="shop_number" value="203"/>
+            <column name="shop_id" value="8"/>
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="10"/>
+            <column name="floor" value="2"/>
+            <column name="shop_number" value="204"/>
+            <column name="shop_id" value="9"/>
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="11"/>
+            <column name="floor" value="2"/>
+            <column name="shop_number" value="205"/>
+            <column name="shop_id" value="10"/>
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="12"/>
+            <column name="floor" value="2"/>
+            <column name="shop_number" value="206"/>
+            <column name="shop_id" value="11"/>
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="13"/>
+            <column name="floor" value="2"/>
+            <column name="shop_number" value="207"/>
+            <column name="shop_id" value="12"/>
+        </insert>
+        <insert tableName="location">
+            <column name="id" value="14"/>
+            <column name="floor" value="1"/>
+            <column name="shop_number" value="107"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

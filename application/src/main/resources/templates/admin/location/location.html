@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:replace="/common/head_data :: head">
+    <title>Title</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<header th:include="/common/header :: content"></header>
+
+<!--Edit location-->
+
+<div class="container px-5 my-5">
+
+    <form class="row g-3 needs-validation" accept-charset="UTF-8" action="#" novalidate
+          th:action="${location.getId() == null} ? @{/admin/locations/new} : @{/admin/locations/edit/{id}(id=*{id})}" th:object="${location}" method="post">
+
+        <h1 class="bg-light text-center" th:if="${location.getId() == null}"
+            th:text="#{common.menu.administrator.locations.add}">
+            Создание нового торгового места
+        </h1>
+        <h1 class="bg-light text-center" th:if="${location.getId() != null}"
+            th:text="#{common.menu.administrator.locations.edit} + ' ' + *{shopNumber}">
+            Редактирование торгового места
+        </h1>
+        <div class="form-floating mb-3" th:if="${location.getId() != null}">
+            <input class="form-control" name="id" id="id" type="text"
+                   placeholder="Идентификационный номер"
+                   th:field="*{id}" readonly tabindex="-1"
+                   th:classappend="${#fields.hasErrors('id')} ? is-invalid : is-valid"/>
+            <label for="id" th:text="#{common.ID}">Идентификационный номер</label>
+            <div th:if="${#fields.hasErrors('id')}" class="invalid-feedback bg-info fs-5"
+                 th:errors="*{id}">
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input class="form-control" name="shopNumber" id="shopNumber" type="text"
+                   th:placeholder="#{common.location.shop_number}"
+                   required
+                   th:field="*{shopNumber}"
+                   th:classappend="${#fields.hasErrors('shopNumber')} ? is-invalid : is-valid"/>
+            <label for="shopNumber"
+                   th:text="#{common.location.shop_number}">Номер торгового места</label>
+            <div th:if="${#fields.hasErrors('shopNumber')}" class="invalid-feedback bg-info fs-5"
+                 th:errors="*{shopNumber}">
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input class="form-control" name="floor" id="floor" type="text"
+                   th:placeholder="#{common.location.floor}"
+                   required min="1" max="10" step="1"
+                   th:field="*{floor}"
+                   th:classappend="${#fields.hasErrors('floor')} ? is-invalid : is-valid"/>
+            <label for="floor"
+                   th:text="#{common.location.floor}">Этаж</label>
+            <div th:if="${#fields.hasErrors('floor')}" class="invalid-feedback bg-info fs-5"
+                 th:errors="*{floor}">
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <textarea class="form-control" name="description" id="description"
+                      th:placeholder="#{common.location.description}" style="height: 100px"
+                      required
+                      th:field="*{description}"
+                      th:classappend="${#fields.hasErrors('description')} ? is-invalid : is-valid">
+            </textarea>
+            <label for="description"
+                   th:text="#{common.location.description}">Описание</label>
+            <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback bg-info fs-5"
+                 th:errors="*{description}">
+            </div>
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-primary btn-lg" type="submit"
+                    th:text="#{common.menu.save}">Сохранить
+            </button>
+            <a class="btn btn-danger btn-lg" type="button" href="#"
+               th:href="@{'/admin/locations'}" th:text="#{common.menu.back}">Назад</a>
+        </div>
+    </form>
+</div>
+
+<footer th:replace="/common/footer :: content"></footer>
+</body>
+</html>
