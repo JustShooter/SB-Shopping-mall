@@ -12,5 +12,8 @@ public class MockConstants {
     public static final String ADMIN_CATEGORY_CATEGORY_LIST = "/admin/category/categoryList";
     public static final String ALL_CATEGORIES = "allCategories";
     public static final String REDIRECT = "redirect:";
-    public static final String RETURN_URL = "returnUrl";
+    public static final String STREET_TYPES = "streetTypes";
+
+    private MockConstants() {
+    }
 }

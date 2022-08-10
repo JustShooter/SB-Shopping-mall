@@ -18,6 +18,7 @@ public class ShopOwnerDto implements Serializable {
 
     @Length(min = 3, max = 50, message = "{validation.shop_owner.owner_name.length}")
     @NotBlank(message = "{validation.shop_owner.owner_name.not_blank}")
+    // TODO Make RegEx refactoring
     @Pattern(regexp = "^[А-ЯЁA-Z][0-9а-яА-ЯёЁa-zA-Z -]+?[0-9а-яА-ЯёЁa-zA-Z]+$", message = "{validation.shop_owner.owner_name.pattern}")
     private String ownerName;
 

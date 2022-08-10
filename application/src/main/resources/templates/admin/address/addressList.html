@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:replace="/common/head_data :: head">
+    <title>Title</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<header th:include="/common/header :: content"></header>
+
+<h1 class="bg-light" th:text="#{common.menu.administrator.addresses.list}">Список адресов компаний</h1>
+
+<div class="container-flex">
+    <div class="row">
+        <div class="d-flex">
+            <table class="table table-hover table-striped bg-light">
+                <thead>
+                <tr>
+                    <th scope="col" th:text="#{common.ID}">ID</th>
+                    <th scope="col" th:text="#{common.address.city}">Город</th>
+                    <th scope="col" th:text="#{common.address.street_type}">Тип улицы</th>
+                    <th scope="col" th:text="#{common.address.street}">Улица</th>
+                    <th scope="col" th:text="#{common.address.building_number}">Номер дома</th>
+                    <th scope="col" th:text="#{common.address.office_number}">Номер офиса</th>
+                    <th scope="col" th:text="#{common.menu.operations}">Операции</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                <tr th:each="address : ${allAddresses}">
+                    <th scope="row" th:text="${address.getId()}"></th>
+                    <td th:text="${address.getCity()}"></td>
+                    <td th:text="${address.getStreetType().getFullName()}"></td>
+                    <td th:text="${address.getStreet()}"></td>
+                    <td th:text="${address.getBuildingNumber()}"></td>
+                    <td th:text="${address.getOfficeNumber()}"></td>
+                    <td>
+                        <a role="button" class="btn btn-info btn-sm"
+                           th:href="@{'/admin/addresses/edit/' + ${address.getId()}}"
+                           th:text="#{common.menu.administrator.addresses.edit}">Редактировать</a>
+                        <a role="button" class="btn btn-danger btn-sm"
+                           th:href="@{'/admin/addresses/delete/' + ${address.getId()}}"
+                           th:text="#{common.menu.administrator.addresses.delete}">Удалить</a>
+                    </td>
+                </tr>
+
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th scope="col" th:text="#{common.ID}">ID</th>
+                    <th scope="col" th:text="#{common.address.city}">Город</th>
+                    <th scope="col" th:text="#{common.address.street_type}">Тип улицы</th>
+                    <th scope="col" th:text="#{common.address.street}">Улица</th>
+                    <th scope="col" th:text="#{common.address.building_number}">Номер дома</th>
+                    <th scope="col" th:text="#{common.address.office_number}">Номер офиса</th>
+                    <th scope="col" th:text="#{common.menu.operations}">Операции</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="bg-light d-grid gap-2">
+    <a role="button" class="btn btn-success btn-lg"
+       th:href="@{'/admin/addresses/new'}"
+       th:text="#{common.menu.administrator.addresses.add}">Создать</a>
+</div>
+
+<footer th:replace="/common/footer :: content"></footer>
+</body>
+</html>

@@ -33,7 +33,7 @@ public class AdminLocationsController {
 
     @RequestMapping("/admin/locations/new")
     public String showNewLocationPage(Model model) {
-        model.addAttribute(TITLE, "title.admin.locations.new");
+        model.addAttribute(TITLE, "title.admin.locations.add");
         LocationDto location = new LocationDto();
         model.addAttribute("location", location);
         return "admin/location/location";

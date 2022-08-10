@@ -1,10 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:replace="/common/head_data :: head">
     <title>Title</title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
+<header th:include="/common/header :: content"></header>
 
+<!--address-->
+
+<div class="container px-5 my-5">
+
+    <form id="address-form" class="row g-3 needs-validation" accept-charset="UTF-8" action="#" novalidate
+          th:action="${item.getId() == null} ? @{/admin/items/new} : @{/admin/items/edit/{id}(id=*{id})}"
+          th:object="${item}" method="post">
+
+        <h1 class="bg-light text-center" th:if="${item.getId() == null}"
+            th:text="#{common.menu.administrator.items.add}">
+            Создание нового адреса
+        </h1>
+        <h1 class="bg-light text-center" th:if="${item.getId() != null}"
+            th:text="#{common.menu.administrator.items.edit} + ' ' + *{id}">
+            Редактирование адреса
+        </h1>
+        <div class="form-floating mb-3" th:if="${item.getId() != null}">
+            <input class="form-control" name="id" id="id" type="text"
+                   placeholder="Идентификационный номер"
+                   th:field="*{id}" readonly tabindex="-1"
+                   th:classappend="${#fields.hasErrors('id')} ? is-invalid : is-valid"/>
+            <label for="id" th:text="#{common.ID}">Идентификационный номер</label>
+            <div th:if="${#fields.hasErrors('id')}" class="invalid-feedback bg-info fs-5"
+                 th:errors="*{id}">
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input class="form-control" name="name" id="name" type="text"
+                   th:placeholder="#{common.item.name}"
+                   required
+                   th:field="*{name}"
+                   th:classappend="${#fields.hasErrors('name')} ? is-invalid : is-valid"/>
+            <label for="name" th:text="#{common.item.name}">Наименование</label>
+            <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback bg-info fs-5"
+                 th:errors="*{name}">
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input class="form-control" name="article" id="article" type="text"
+                   th:placeholder="#{common.item.article}"
+                   required
+                   th:field="*{article}"
+                   th:classappend="${#fields.hasErrors('article')} ? is-invalid : is-valid"/>
+            <label for="article" th:text="#{common.item.article}">Артикул</label>
+            <div th:if="${#fields.hasErrors('article')}" class="invalid-feedback bg-info fs-5"
+                 th:errors="*{article}">
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input class="form-control" name="barcode" id="barcode" type="text"
+                   th:placeholder="#{common.item.barcode}"
+                   required
+                   th:field="*{barcode}"
+                   th:classappend="${#fields.hasErrors('barcode')} ? is-invalid : is-valid"/>
+            <label for="barcode" th:text="#{common.item.barcode}">Штрих-код</label>
+            <div th:if="${#fields.hasErrors('barcode')}" class="invalid-feedback bg-info fs-5"
+                 th:errors="*{barcode}">
+            </div>
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-primary btn-lg" type="submit"
+                    th:text="#{common.menu.save}">Сохранить
+            </button>
+            <a class="btn btn-danger btn-lg" type="button" href="#"
+               th:href="@{'/admin/items'}" th:text="#{common.menu.back}">Назад</a>
+        </div>
+    </form>
+</div>
+
+<footer th:replace="/common/footer :: content"></footer>
 </body>
 </html>

@@ -1,10 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:replace="/common/head_data :: head">
     <title>Title</title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
+<header th:include="/common/header :: content"></header>
 
+<h1 class="bg-light" th:text="#{common.menu.administrator.items.list}">Список товаров</h1>
+
+<div class="container-flex">
+    <label for="pageSizeSelect"></label>
+    <select id="pageSizeSelect">
+        <option value="5" th:selected="${items.size == 5}">5</option>
+        <option value="10" th:selected="${items.size == 10}">10</option>
+        <option value="20" th:selected="${items.size == 20}">20</option>
+        <option value="50" th:selected="${items.size == 50}">50</option>
+        <option value="100" th:selected="${items.size == 100}">100</option>
+    </select>
+    <div class="row">
+        <div class="d-flex">
+            <table class="table table-hover table-striped bg-light">
+                <thead>
+                <tr>
+                    <th scope="col" th:text="#{common.ID}">ID</th>
+                    <th scope="col" th:text="#{common.item.name}">Наименование товара</th>
+                    <th scope="col" th:text="#{common.item.article}">Артикул</th>
+                    <th scope="col" th:text="#{common.item.barcode}">Штрих-код</th>
+                    <th scope="col" th:text="#{common.menu.operations}">Операции</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                <tr th:each="item : ${items.content}">
+                    <th scope="row" th:text="${item.getId()}"></th>
+                    <td th:text="${item.getName()}"></td>
+                    <td th:text="${item.getArticle()}"></td>
+                    <td th:text="${item.getBarcode()}"></td>
+                    <td>
+                        <a role="button" class="btn btn-info btn-sm"
+                           th:href="@{'/admin/items/edit/' + ${item.getId()}}"
+                           th:text="#{common.menu.administrator.items.edit}">Редактировать</a>
+                        <a role="button" class="btn btn-danger btn-sm"
+                           th:href="@{'/admin/items/delete/' + ${item.getId()}}"
+                           th:text="#{common.menu.administrator.items.delete}">Удалить</a>
+                    </td>
+                </tr>
+
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th scope="col" th:text="#{common.ID}">ID</th>
+                    <th scope="col" th:text="#{common.item.name}">Наименование товара</th>
+                    <th scope="col" th:text="#{common.item.article}">Артикул</th>
+                    <th scope="col" th:text="#{common.item.barcode}">Штрих-код</th>
+                    <th scope="col" th:text="#{common.menu.operations}">Операции</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <nav aria-label="Pagination" th:if="${items.getTotalPages() > 1}">
+        <ul class="pagination justify-content-center" th:if="${items.totalPages > 0}">
+            <li class="page-item" th:classappend="${items.first} ? disabled">
+                <a class="page-link" href="#" aria-label="Previous"
+                   th:href="@{/admin/items(size=${items.size}, page=${currentPage}-1)}">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item" th:each="pageNumber : ${pageNumbers}"
+                th:classappend="${pageNumber==items.number + 1} ? active">
+                <a class="page-link" href="#"
+                   th:href="@{/admin/items(size=${items.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}">page</a>
+            </li>
+            <li class="page-item" th:classappend="${items.last} ? disabled">
+                <a class="page-link" href="#" aria-label="Next"
+                   th:href="@{/admin/items(size=${items.size}, page=${currentPage}+1)}">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="bg-light d-grid gap-2">
+    <a role="button" class="btn btn-success btn-lg"
+       th:href="@{'/admin/items/new'}"
+       th:text="#{common.menu.administrator.items.add}">Создать</a>
+</div>
+
+<footer th:replace="/common/footer :: content"></footer>
 </body>
 </html>

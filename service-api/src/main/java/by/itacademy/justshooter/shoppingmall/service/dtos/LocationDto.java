@@ -20,6 +20,7 @@ public class LocationDto implements Serializable {
     private Integer id;
 
     @Length(min = 3, max = 10, message = "{validation.location.shop_number.length}")
+    // TODO Make RegEx refactoring
     @Pattern(regexp = "^[0-9]+(?:\\s+[А-Яа-яЁёA-Za-z0-9]+)*$", message = "{validation.location.shop_number.pattern}")
     private String shopNumber;
 

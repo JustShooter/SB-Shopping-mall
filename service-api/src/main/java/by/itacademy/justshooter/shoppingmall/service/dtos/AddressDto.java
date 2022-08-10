@@ -19,11 +19,13 @@ public class AddressDto implements Serializable {
 
     @Length(min = 3, max = 50, message = "{validation.address.city.length}")
     @NotBlank(message = "{validation.address.city.not_blank}")
+    // TODO Make RegEx refactoring
     @Pattern(regexp = "^[А-ЯЁA-Z][0-9а-яА-ЯёЁa-zA-Z -]+?[0-9а-яА-ЯёЁa-zA-Z]+$", message = "{validation.address.city.pattern}")
     private String city;
 
     @Length(min = 3, max = 50, message = "{validation.address.street.length}")
     @NotBlank(message = "{validation.address.street.not_blank}")
+    // TODO Make RegEx refactoring
     @Pattern(regexp = "^[А-ЯЁA-Z][0-9а-яА-ЯёЁa-zA-Z -]+?[0-9а-яА-ЯёЁa-zA-Z]+$", message = "{validation.address.street.pattern}")
     private String street;
 
@@ -31,6 +33,7 @@ public class AddressDto implements Serializable {
 
     @Length(min = 1, max = 10, message = "{validation.address.building_number.length}")
     @NotBlank(message = "{validation.address.building_number.not_blank}")
+    // TODO Make RegEx refactoring
     @Pattern(regexp = "^[0-9]+?[А-Яа-яЁёA-Za-z0-9/-]*?[А-Яа-яЁёA-Za-z0-9]*?$", message = "{validation.address.building_number.pattern}")
     private String buildingNumber;
 

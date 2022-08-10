@@ -7,16 +7,17 @@
 <body class="d-flex flex-column min-vh-100">
 <header th:include="/common/header :: content"></header>
 
-<!--Edit category-->
+<!--category-->
 
 <div class="container px-5 my-5">
 
     <form class="row g-3 needs-validation" accept-charset="UTF-8" action="#" novalidate
-          th:action="${category.getId() == null} ? @{/admin/categories/new} : @{/admin/categories/edit/{id}(id=*{id})}" th:object="${category}" method="post">
+          th:action="${category.getId() == null} ? @{/admin/categories/new} : @{/admin/categories/edit/{id}(id=*{id})}"
+          th:object="${category}" method="post">
 
             <h1 class="bg-light text-center" th:if="${category.getId() == null}"
                 th:text="#{common.menu.administrator.categories.add}">
-                Создание новогой категории
+                Создание новой категории
             </h1>
             <h1 class="bg-light text-center" th:if="${category.getId() != null}"
                 th:text="#{common.menu.administrator.categories.edit} + ' ' + *{name}">
